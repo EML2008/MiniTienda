@@ -1,1 +1,1 @@
-MiniTienda
+miniTienda
