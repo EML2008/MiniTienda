@@ -943,106 +943,108 @@ public class Main extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNombreActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       char[] password2 = jpassword.getPassword();
-       char[] confirm2 =jconfirm_pass.getPassword();
-       String nombre = jtNombre.getText();
-       String apellidos =jtApellidos.getText();
-       String user= jtUser.getText();
-       String correo = jcorreo.getText();
-       int encontrado = -1;
-       String password = "";
-       for(int x = 0; x < password2.length ; x++)
-       {
-           password += password2[x];
-       }
-       String confirm = "";
-       for(int x = 0; x < confirm2.length ; x++)
-       {
-           confirm += confirm2[x];
-       }
 
-       if(!user.isEmpty())
-       {
-            encontrado = Utils.buscarCliente(arrayClientes, user);
-       }
-       // bloque de validaciones
-       int formulario_ok = 0;
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+		char[] password2 = jpassword.getPassword();
+		char[] confirm2 = jconfirm_pass.getPassword();
+		String nombre = jtNombre.getText();
+		String apellidos = jtApellidos.getText();
+		String user = jtUser.getText();
+		String correo = jcorreo.getText();
+		String password = "";
 
-        if(nombre.isEmpty())
-        {
-            String texto = "No has introducido tu nombre";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-        else if(apellidos.isEmpty())
-        {
-            String texto = "No has introducido tus apellidos";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-        else if(correo.isEmpty())
-        {
-            String texto = "No has introducido el correo";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-        else if((!correo.contains("@"))||(!correo.contains(".")))
-        {
-            String texto = "Error en el formato del correo ( usuario@dominio.com )";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-        else if(user.isEmpty())
-        {
-            String texto = "No has introducido el nombre de usuario";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-        else if(encontrado != -1)
-        {
-            String texto = "El nombre de usuario ya existe";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-       else if(password.isEmpty())
-       {
-            String texto = "No has introducido el password";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-       else if(password.length()<5)
-       {
-            String texto = " El password ha de contener más de 4 carácteres";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
+		for (int x = 0; x < password2.length; x++) {
+			password += password2[x];
+		}
 
-        else if(confirm.isEmpty() || (password.equals(confirm) == false))
-        {
-            String texto = "La contraseña debe coincidir en los 2 campos";
-            String cabecera = "Error en registro ";
-            optionPane(texto,cabecera);
-        }
-        else
-        {
-           formulario_ok = 1;
-        }
-    
-       if(formulario_ok ==1){
-           arrayClientes = Utils.insertarCliente(arrayClientes, nombre, apellidos, password, user, correo);
-           if(isAdmin)
-           {
-               mostrarUsuaris();
-           }
-           else
-           {
-               String texto = " Estimado sr/a "+nombre+" ,Le damos la bienvenida a nuestra tienda";
-               JOptionPane.showMessageDialog(new JFrame(), texto, "Los datos han sido registrados correctamente ", JOptionPane.INFORMATION_MESSAGE);
-           }
-           jdRegistro.setVisible(false);
-       }
-    }//GEN-LAST:event_jButton1ActionPerformed
+		String confirm = "";
+
+		for (int x = 0; x < confirm2.length; x++) {
+			confirm += confirm2[x];
+		}
+
+		if (isValidUser(nombre, apellidos, user, correo) && isValidPassword(password, confirm)) {
+			arrayClientes = Utils.insertarCliente(arrayClientes, nombre, apellidos, password, user, correo);
+			if (isAdmin) {
+				mostrarUsuaris();
+			} else {
+				String texto = " Estimado sr/a " + nombre + " ,Le damos la bienvenida a nuestra tienda";
+				JOptionPane.showMessageDialog(new JFrame(), texto, "Los datos han sido registrados correctamente ",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			jdRegistro.setVisible(false);
+		}
+	}// GEN-LAST:event_jButton1ActionPerformed
+
+
+	private boolean isValidUser(String nombre, String apellidos, String user, String correo) {
+
+		int encontrado = -1;
+
+		if (!user.isEmpty()) {
+			encontrado = Utils.buscarCliente(arrayClientes, user);
+		}
+
+		if (nombre.isEmpty()) {
+			String texto = "No has introducido tu nombre";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if (apellidos.isEmpty()) {
+			String texto = "No has introducido tus apellidos";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if (correo.isEmpty()) {
+			String texto = "No has introducido el correo";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if ((!correo.contains("@")) || (!correo.contains("."))) {
+			String texto = "Error en el formato del correo ( usuario@dominio.com )";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if (user.isEmpty()) {
+			String texto = "No has introducido el nombre de usuario";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if (encontrado != -1) {
+			String texto = "El nombre de usuario ya existe";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		}
+
+		return true;
+
+	}
+
+
+
+	private boolean isValidPassword(String password, String confirm) {
+
+		if (password.isEmpty()) {
+			String texto = "No has introducido el password";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if (password.length() < 5) {
+			String texto = " El password ha de contener más de 4 carácteres";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		} else if (confirm.isEmpty() || !(password.equals(confirm))) {
+			String texto = "La contraseña debe coincidir en los 2 campos";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			return false;
+		}
+
+		return true;
+
+	}
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
