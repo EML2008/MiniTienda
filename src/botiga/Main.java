@@ -1025,24 +1025,26 @@ public class Main extends javax.swing.JFrame
 
 	private boolean isValidPassword(String password, String confirm) {
 
+		boolean isValidaPassword = true;
+		
 		if (password.isEmpty()) {
 			String texto = "No has introducido el password";
 			String cabecera = "Error en registro ";
 			optionPane(texto, cabecera);
-			return false;
+			isValidaPassword = false;
 		} else if (password.length() < 5) {
 			String texto = " El password ha de contener más de 4 carácteres";
 			String cabecera = "Error en registro ";
 			optionPane(texto, cabecera);
-			return false;
+			isValidaPassword = false;
 		} else if (confirm.isEmpty() || !(password.equals(confirm))) {
 			String texto = "La contraseña debe coincidir en los 2 campos";
 			String cabecera = "Error en registro ";
 			optionPane(texto, cabecera);
-			return false;
+			isValidaPassword = false;
 		}
 
-		return true;
+		return isValidaPassword;
 
 	}
 
