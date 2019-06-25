@@ -981,6 +981,24 @@ public class Main extends javax.swing.JFrame
 
 	private boolean isValidUser(String nombre, String apellidos, String user, String correo) {
 
+		
+        /**
+        * Función para validar si el usuario ingresado es válido o no. 
+        * El usuario no puede estar en blanco 
+        * El apellido no puede estar en blanco 
+        * El correo no puede estar en blanco 
+        * El nombre no puede estar en blanco 
+        * El usuario debe estar ingresado en el sistema para poder realizar su validación.
+        *
+        * @param nombre
+        * @param apellidos
+        * @param user
+        * @param correo
+        * @return true/false
+        * 
+        */
+		
+		//Seteamos una bandera para identificar si encontramos el usuario o no.
 		int encontrado = -1;
 
 		if (!user.isEmpty()) {
@@ -1027,6 +1045,21 @@ public class Main extends javax.swing.JFrame
 
 	private boolean isValidPassword(String password, String confirm) {
 
+		/**
+         * El password no debe estar vacio. 
+         * El password debe ser mayor a 8 caracteres.
+         * El password debe ser menor a 20 caracteres. 
+         * La confirmación no puede estar
+         * vacio. La confirmación debe ser mayor a 8 caracteres. 
+         * La confirmación debe ser menor a 20 caracteres. 
+         * El password no debe contener caracteres especiales.
+         * La confirmación no debe contener caracteres especiales.
+         *
+         * @param password
+         * @param confirm
+         * @return
+         */
+		
 		boolean isValidPassword = true;
 
 		if (password.isEmpty()) {
