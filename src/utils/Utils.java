@@ -210,9 +210,9 @@ public class Utils
         Properties props = new Properties();
         
         // Aqui usuario y password de gmail
-        String cuentaCorreo = "cuenta@dominio.com"; // Introduce una cuenta de correo valida
-        String passwCorreo = "password";  // Introduce el password de la cuenta
-        String serverSMTP = "smtp.server"; // Introduce el servidor smtp de la cuenta
+        String cuentaCorreo = "clientesminitienda@gmail.com"; // Introduce una cuenta de correo valida
+        String passwCorreo = "clientesminitienda123";  // Introduce el password de la cuenta
+        String serverSMTP = "smtp.gmail.com"; // Introduce el servidor smtp de la cuenta
 
         // Nombre del host de correo, es smtp.gmail.com
 
@@ -244,7 +244,6 @@ public class Utils
         message.setFrom(new InternetAddress(cuentaCorreo));
 
         // A quien va dirigido
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("risque33@gmail.com"));
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(cliente.getCorreo()));
 
         message.setSubject(subject);
