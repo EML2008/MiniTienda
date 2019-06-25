@@ -24,6 +24,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import utils.Utils;
 
 public class Main extends javax.swing.JFrame
@@ -1025,26 +1027,31 @@ public class Main extends javax.swing.JFrame
 
 	private boolean isValidPassword(String password, String confirm) {
 
-		boolean isValidaPassword = true;
-		
+		boolean isValidPassword = true;
+
 		if (password.isEmpty()) {
 			String texto = "No has introducido el password";
 			String cabecera = "Error en registro ";
 			optionPane(texto, cabecera);
-			isValidaPassword = false;
-		} else if (password.length() < 5) {
-			String texto = " El password ha de contener más de 4 carácteres";
+			isValidPassword = false;
+		} else if (password.length() < 8 || password.length() > 20) {
+			String texto = " El password ha de contener más de 8 carácteres";
 			String cabecera = "Error en registro ";
 			optionPane(texto, cabecera);
-			isValidaPassword = false;
+			isValidPassword = false;
+		} else if (!password.matches("[a-zA-Z0-9]+")) {
+			String texto = " El password no puede contener carácteres especiales como '@,.!#$%&/()=¡-'";
+			String cabecera = "Error en registro ";
+			optionPane(texto, cabecera);
+			isValidPassword = false;
 		} else if (confirm.isEmpty() || !(password.equals(confirm))) {
 			String texto = "La contraseña debe coincidir en los 2 campos";
 			String cabecera = "Error en registro ";
 			optionPane(texto, cabecera);
-			isValidaPassword = false;
+			isValidPassword = false;
 		}
 
-		return isValidaPassword;
+		return isValidPassword;
 
 	}
 
