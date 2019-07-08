@@ -210,10 +210,16 @@ public class Utils
         Properties props = new Properties();
         
         // Aqui usuario y password de gmail
-        String cuentaCorreo = "clientesminitienda@gmail.com"; // Introduce una cuenta de correo valida
-        String passwCorreo = "clientesminitienda123";  // Introduce el password de la cuenta
-        String serverSMTP = "smtp.gmail.com"; // Introduce el servidor smtp de la cuenta
+        //String cuentaCorreo = "clientesminitienda@gmail.com"; // Introduce una cuenta de correo valida
+        //String passwCorreo = "clientesminitienda123";  // Introduce el password de la cuenta
+        //String serverSMTP = "smtp.gmail.com"; // Introduce el servidor smtp de la cuenta
 
+        String cuentaCorreo = "clientesminitienda@outlook.com"; // Introduce una cuenta de correo valida
+        String passwCorreo = "grupo8analisis";  // Introduce el password de la cuenta
+        String serverSMTP = "smtp.live.com"; // Introduce el servidor smtp de la cuenta
+        
+        
+        
         // Nombre del host de correo, es smtp.gmail.com
 
         props.setProperty("mail.smtp.host", serverSMTP);
@@ -222,7 +228,8 @@ public class Utils
         props.setProperty("mail.smtp.starttls.enable", "true");
 
         // Puerto de gmail para envio de correos
-        props.setProperty("mail.smtp.port","587");
+        //props.setProperty("mail.smtp.port","587");
+        props.setProperty("mail.smtp.port","25");
 
         // Nombre del usuario
         props.setProperty("mail.smtp.user","");
